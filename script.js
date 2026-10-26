@@ -248,15 +248,15 @@ if (arcContainer) {
    6. AI Buddy Assistant (Interactive In-Browser Q&A)
    ------------------------------------------------------------------- */
 const KNOWLEDGE_BASE = {
-  projects: "Highlights include VoiceHealth (voice-logged health dashboard with Gemini 1.5 Flash), InterviewIQ (AI mock interview platform with Gemini & Monaco code editor), SignBridge (sign-language video calls via WebRTC & MediaPipe), plus an AI Data Analyst, RAG Q&A Engine, and Signature Forgery Detection CNN. Check out the Projects section below!",
-  experience: "Nayan has gained rich real-world experience across 4 internships: (1) AI Sales Intern at Huntfortomorrow, (2) AI Web Developer Intern at Inambiguous Foundation, (3) LLM Post-Training Intern at Ethara.ai (tuned LLMs with SFT/RLHF; boosted prompt accuracy by 40%), and (4) ML Engineer Intern at CodSoft (built 3 production ML pipelines with 15% false positive reduction).",
-  skills: "His core technical arsenal includes: Python, C/C++, SQL, LangChain, LangGraph, RAG, FastAPI, Flask, React.js, Next.js, TensorFlow, Scikit-learn, Pandas, Docker, Git, AWS (EC2/S3), and Oracle OCI Generative AI.",
-  achievements: "Nayan is a Tata Imagination Challenge Semifinalist, EY Techathon 6.0 Top 100 National Finalist (out of 5,000+ teams), Adobe Hackathon Top 50 National Finalist (out of 6,000+ teams), and an open-source contributor to QuickVoice.",
-  education: "He is a final-year B.Tech in Computer Science Engineering (AI & ML) student at Vellore Institute of Technology (VIT Bhopal), maintaining a strong CGPA of 8.40/10.",
-  contact: "You can reach Nayan directly via email at nayan.pise8347@gmail.com, explore his GitHub at github.com/nayan-pise, or connect on LinkedIn at linkedin.com/in/nayan-pise-94a62a346/.",
-  resume: "You can view or download Nayan's full resume right from the hero buttons or by clicking 'Download Resume' above!",
-  ethara: "At Ethara.ai, Nayan specialized in LLM post-training using Supervised Fine-Tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF). He engineered a smart prompt system for a video color-picker tool that raised model accuracy by 40%.",
-  codsoft: "At CodSoft, Nayan engineered 3 scalable ML pipelines (Fraud, Spam, Churn) over 15,000+ records, cutting false positives by 15% with optimized Random Forest classifiers."
+  projects: "Top projects from Nayan's resume: (1) VoiceHealth - React Native (Expo) app using Gemini 1.5 Flash native audio understanding to log health metrics (hydration, sleep, habits, nutrition) from 1 spoken sentence with Supabase; (2) InterviewIQ - Full-stack mock interview platform with Gemini AI resume question generator, Monaco live code editor, automated JSON grading, and proctoring; (3) SignBridge - Real-time sign-language video calling with WebRTC, SocketIO, and MediaPipe hand-landmark classification.",
+  experience: "Nayan has completed impactful industry internships: (1) LLM Post-Training Intern at Ethara.ai (Feb 2026 – June 2026), tuning LLMs via SFT and RLHF to mitigate hallucinations (90% precision improvement) and designing prompt architectures boosting color-picker selection accuracy by 40%; (2) ML Engineer Intern at CodSoft (Nov 2025 – Dec 2025), building 3 production pipelines (Fraud, Spam, Churn) over 15,000+ records and cutting false positives by 15% with 94% reliability.",
+  skills: "Technical Skills directly from Nayan's resume: Foundational CS (DS&A, OOP, OS, Networks, DBMS, SQL/NoSQL), Languages (Python, C++, SQL, HTML/CSS), Generative AI & LLMs (LangChain, LangGraph, RAG, Prompt Engineering, Agentic AI, Vector DBs, LLMOps), Web & Analytics (FastAPI, Flask, React.js, Express.js, Node.js, Next.js, TensorFlow, Scikit-learn, Pandas, NumPy, Power BI), Testing (TDD, PyTest), DevOps (CI/CD, Docker, Git, AWS EC2/S3, Azure, GCP).",
+  achievements: "Certifications: UMich Applied ML in Python, Google IT Support Professional, NPTEL Cloud Computing (Top 5%), Oracle OCI AI/GenAI. Hackathons: EY Techathon 6.0 Top 100 teams nationally (5000+), Adobe Hackathon Top 50 teams nationally (6000+), and Tata Imagination Challenge (Qualified Round 2).",
+  education: "B.Tech in Computer Science and Engineering (AI & ML) at Vellore Institute of Technology (VIT Bhopal), maintaining a strong 8.40/10 CGPA (Sep 2023 – March 2027).",
+  contact: "Email: nayan.pise8347@gmail.com | Phone: +91-9834794289 | GitHub: github.com/nayan-pise | LinkedIn: linkedin.com/in/nayan-pise",
+  resume: "You can download Nayan's official resume by clicking 'Download Resume' in the navigation bar or hero section!",
+  ethara: "At Ethara.ai (Feb 2026 – June 2026), Nayan tuned LLMs for video workflows via Supervised Fine-Tuning (SFT) and RLHF across multiple iterations, evaluating outputs to mitigate hallucinations and raising model precision by 90%. He also created a prompt system boosting high-accuracy color picker selections by 40%.",
+  codsoft: "At CodSoft (Nov 2025 – Dec 2025), Nayan engineered 3 scalable Python pipelines (Fraud, Spam, Churn) for 15,000+ records (20% data quality gain) and tuned Random Forest classifiers to cut false positives by 15% with 94% detection reliability."
 };
 
 const KEYWORD_MAP = [
@@ -337,44 +337,44 @@ initChat();
    ------------------------------------------------------------------- */
 const PROJECTS = [
   {
-    title: "AI Mock Interview System",
+    title: "VoiceHealth - Voice AI Health App",
     category: "AI & LLM",
-    description: "Enterprise mock interview platform with Gemini resume-based question generation, Monaco code editor, STAR behavioural round, and candidate scoring.",
+    description: "Devised a React Native (Expo) Android app using Gemini 1.5 Flash native audio understanding to log health data (hydration, sleep, habits, nutrition) from a single spoken sentence with zero manual entry, backed by a dynamic NativeWind dashboard and Supabase sync.",
+    repo: "CalmHealthApp",
+    tags: ["React Native", "Gemini 1.5 Flash", "Supabase", "NativeWind", "Voice AI"],
+    image: ""
+  },
+  {
+    title: "InterviewIQ - Enterprise AI Mock Interview Platform",
+    category: "AI & LLM",
+    description: "Developed a full-stack platform with 3 interview modes generating tailored questions from candidate resumes via Gemini AI, an embedded Monaco live coding editor with time-complexity analysis and automated JSON-based grading, STAR-method behavioral rounds, and 3 enterprise proctoring controls.",
     repo: "AI-mock-interview-enterprices-platform",
-    tags: ["Gemini 1.5", "Flask", "Monaco Editor", "NLP"],
+    tags: ["Gemini AI", "Monaco Editor", "Flask", "SQLite", "Proctoring"],
     image: "assets/project1.png"
   },
   {
-    title: "Heart Disease Prediction System",
-    category: "Computer Vision & ML",
-    description: "Clinical predictive model analyzing 4,000+ patient records, achieving 92% diagnostic accuracy with 25% dimensionality reduction via PCA.",
-    repo: "-Heartbeat-Sound-Classifier-Flask-",
-    tags: ["Python", "Scikit-learn", "Pandas", "PCA"],
-    image: "assets/project2.png"
+    title: "SignBridge - Real-Time Sign-Language Video Calling",
+    category: "AI & LLM",
+    description: "Deployed a real-time peer-to-peer video calling web app using SocketIO and WebRTC. Trained a MediaPipe hand-landmark classifier to detect sign-language gestures live on-screen, and implemented speech-to-sign via Web Speech API.",
+    repo: "Sign-Bridge-2.0-Updated-version-",
+    tags: ["WebRTC", "MediaPipe", "SocketIO", "Web Speech API", "Computer Vision"],
+    image: "assets/project4.png"
   },
   {
     title: "Signature Forgery Detection",
     category: "Computer Vision & ML",
-    description: "Deep CNN classifier trained on 1,000+ signature pairs, attaining 96% detection rate with inference speed under 200ms.",
+    description: "Built a deep Convolutional Neural Network (CNN) trained on 1,000+ images, attaining 96% detection rate with inference speed optimized to under 200ms.",
     repo: "-Signature-Forgery-Detection",
     tags: ["TensorFlow", "CNN", "OpenCV", "Deep Learning"],
     image: "assets/project3.png"
   },
   {
-    title: "SignBridge - Sign Language Video Call",
-    category: "AI & LLM",
-    description: "Real-time WebRTC video calling platform with MediaPipe hand-gesture classification translating American Sign Language to speech & text in real-time.",
-    repo: "Sign-Bridge-2.0-Updated-version-",
-    tags: ["WebRTC", "MediaPipe", "Socket.IO", "Computer Vision"],
-    image: "assets/project4.png"
-  },
-  {
-    title: "VoiceHealth AI Dashboard",
-    category: "AI & LLM",
-    description: "Health logging application that extracts hydration, sleep, habits, and nutrition from a single spoken voice command using Gemini audio understanding.",
-    repo: "",
-    tags: ["React Native", "Gemini Audio", "Supabase", "NativeWind"],
-    image: ""
+    title: "Heart Disease Prediction System",
+    category: "Computer Vision & ML",
+    description: "Clinical predictive modeling analyzing 4,000+ patient records, achieving 92% diagnostic accuracy with 25% dimensionality reduction via PCA.",
+    repo: "-Heartbeat-Sound-Classifier-Flask-",
+    tags: ["Python", "Scikit-learn", "Pandas", "PCA"],
+    image: "assets/project2.png"
   },
   {
     title: "AI Data Analyst Agent",
