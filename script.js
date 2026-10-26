@@ -6,7 +6,7 @@ const $ = (id) => document.getElementById(id);
 const GITHUB_BASE = "https://github.com/nayan-pise/";
 
 /* -------------------------------------------------------------------
-   1. Canvas Embers & Ambient Floating Sparks
+   1. Canvas Ambient Embers & Particle Sparks
    ------------------------------------------------------------------- */
 let mouseX = -999, mouseY = -999;
 
@@ -28,7 +28,7 @@ let mouseX = -999, mouseY = -999;
   const resize = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    particles = Array.from({ length: 48 }, () => createParticle(true));
+    particles = Array.from({ length: 45 }, () => createParticle(true));
   };
   resize();
   window.addEventListener("resize", resize);
@@ -42,7 +42,6 @@ let mouseX = -999, mouseY = -999;
       p.y -= p.speedY;
       p.x += Math.sin(time / 1600 + p.phase) * 0.35;
 
-      // Mouse proximity interaction
       const dist = Math.hypot(p.x - mouseX, p.y - mouseY);
       const isNear = dist < 180;
 
@@ -54,12 +53,12 @@ let mouseX = -999, mouseY = -999;
 
       ctx.save();
       ctx.globalAlpha = Math.min(alpha, 1);
-      ctx.shadowBlur = isNear ? 12 : 4;
-      ctx.shadowColor = "#f59e0b";
-      ctx.fillStyle = isNear ? "#fef08a" : "#f59e0b";
+      ctx.shadowBlur = isNear ? 14 : 4;
+      ctx.shadowColor = "#00ffc3";
+      ctx.fillStyle = isNear ? "#1cd8d2" : "#00ffc3";
 
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * (isNear ? 1.6 : 1), 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.radius * (isNear ? 1.6 : 1), 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
     });
@@ -88,8 +87,7 @@ let mouseX = -999, mouseY = -999;
     mouseX = targetX;
     mouseY = targetY;
 
-    // Hover scale up on interactive elements
-    targetScale = e.target.closest("a, button, input, .project-card, .tl-node, .sk-btn") ? 1.6 : 1;
+    targetScale = e.target.closest("a, button, input, .final-project-card, .tl-node, .sk-btn") ? 1.6 : 1;
   });
 
   window.addEventListener("pointerdown", () => {
@@ -102,7 +100,7 @@ let mouseX = -999, mouseY = -999;
     curY += (targetY - curY) * 0.18;
     scale += (targetScale - scale) * 0.14;
 
-    bloom.style.transform = `translate(${curX - 250}px, ${curY - 250}px) scale(${scale})`;
+    bloom.style.transform = `translate(${curX - 260}px, ${curY - 260}px) scale(${scale})`;
     cur.style.transform = `translate(${targetX - 5}px, ${targetY - 5}px)`;
 
     requestAnimationFrame(loop);
@@ -111,7 +109,7 @@ let mouseX = -999, mouseY = -999;
 })();
 
 /* -------------------------------------------------------------------
-   3. Header Navigation, Scroll Spy & Mobile Menu
+   3. Navigation, Scroll Spy & Mobile Menu
    ------------------------------------------------------------------- */
 const burger = $("burger");
 const mobileMenu = $("mobile-menu");
@@ -146,9 +144,9 @@ window.addEventListener("scroll", () => {
   if (!typEl) return;
   const roles = [
     "AI/ML Engineer",
-    "LLM & RAG Systems Builder",
+    "LLM Post-Training & RAG Systems",
     "Full-Stack AI Developer",
-    "Agentic Workflow Specialist"
+    "Autonomous Agent Architect"
   ];
   let roleIdx = 0;
   let charIdx = 0;
@@ -163,11 +161,11 @@ window.addEventListener("scroll", () => {
 
     if (!isDeleting && charIdx === current.length) {
       isDeleting = true;
-      speed = 1800; // Pause at end of text
+      speed = 1800;
     } else if (isDeleting && charIdx === 0) {
       isDeleting = false;
       roleIdx = (roleIdx + 1) % roles.length;
-      speed = 400; // Pause before typing next
+      speed = 400;
     }
     setTimeout(type, speed);
   }
@@ -178,13 +176,13 @@ window.addEventListener("scroll", () => {
    5. Interactive Skills Arc Wheel
    ------------------------------------------------------------------- */
 const SKILLS_DATA = [
-  ["Py", "Python", "My primary language for ML pipelines, LLMs, FastAPI, and data manipulation."],
-  ["LC", "LangChain", "Framework for building multi-step LLM chains, agentic workflows, and integrations."],
-  ["LG", "LangGraph", "Constructing cyclic, stateful multi-agent architectures and reliable autonomous loops."],
+  ["Py", "Python", "Primary language for ML modeling, PyTorch, LangChain, and high-performance FastAPI backends."],
+  ["LC", "LangChain", "Framework for constructing multi-step LLM chains, semantic memory, and tool integration."],
+  ["LG", "LangGraph", "Cyclic, stateful multi-agent architectures and autonomous decision-making loops."],
   ["RAG", "RAG Systems", "Retrieval-augmented generation combining vector search, chunking, and embeddings."],
-  ["FA", "FastAPI", "Building high-performance, asynchronous REST APIs for ML and LLM inference."],
+  ["FA", "FastAPI", "High-throughput asynchronous REST APIs for low-latency ML and LLM inference."],
   ["Re", "React.js", "Modern web frontends for AI applications, dashboards, and real-time interaction."],
-  ["TF", "TensorFlow", "Deep learning model development, CNNs, image recognition, and model tuning."],
+  ["TF", "TensorFlow", "Deep learning CNNs, image recognition, and model tuning."],
   ["SK", "Scikit-learn", "Statistical modeling, clustering, PCA, Random Forest classification, and fraud detection."],
   ["SQL", "SQL", "Relational database schema architecture, indexing, and high-efficiency querying."],
   ["Dk", "Docker", "Containerizing full-stack microservices, ML dependencies, and reproducible deployments."],
@@ -236,7 +234,6 @@ if (arcContainer) {
   renderSkillsArc();
   window.addEventListener("resize", renderSkillsArc);
 
-  // Auto-advance skills if user isn't hovering
   setInterval(() => {
     if (!arcContainer.matches(":hover")) {
       updateSkillDetail((selectedSkillIdx + 1) % SKILLS_DATA.length);
@@ -245,7 +242,7 @@ if (arcContainer) {
 }
 
 /* -------------------------------------------------------------------
-   6. AI Buddy Assistant (Interactive In-Browser Q&A)
+   6. AI Buddy Assistant (Interactive In-Browser Q&A + Voice)
    ------------------------------------------------------------------- */
 const KNOWLEDGE_BASE = {
   projects: "Top projects from Nayan's resume: (1) VoiceHealth - React Native (Expo) app using Gemini 1.5 Flash native audio understanding to log health metrics (hydration, sleep, habits, nutrition) from 1 spoken sentence with Supabase; (2) InterviewIQ - Full-stack mock interview platform with Gemini AI resume question generator, Monaco live code editor, automated JSON grading, and proctoring; (3) SignBridge - Real-time sign-language video calling with WebRTC, SocketIO, and MediaPipe hand-landmark classification.",
@@ -254,7 +251,7 @@ const KNOWLEDGE_BASE = {
   achievements: "Certifications: UMich Applied ML in Python, Google IT Support Professional, NPTEL Cloud Computing (Top 5%), Oracle OCI AI/GenAI. Hackathons: EY Techathon 6.0 Top 100 teams nationally (5000+), Adobe Hackathon Top 50 teams nationally (6000+), and Tata Imagination Challenge (Qualified Round 2).",
   education: "B.Tech in Computer Science and Engineering (AI & ML) at Vellore Institute of Technology (VIT Bhopal), maintaining a strong 8.40/10 CGPA (Sep 2023 – March 2027).",
   contact: "Email: nayan.pise8347@gmail.com | Phone: +91-9834794289 | GitHub: github.com/nayan-pise | LinkedIn: linkedin.com/in/nayan-pise",
-  resume: "You can download Nayan's official resume by clicking 'Download Resume' in the navigation bar or hero section!",
+  resume: "You can download Nayan's official resume by clicking 'My Resume' or 'Resume' in the navigation bar!",
   ethara: "At Ethara.ai (Feb 2026 – June 2026), Nayan tuned LLMs for video workflows via Supervised Fine-Tuning (SFT) and RLHF across multiple iterations, evaluating outputs to mitigate hallucinations and raising model precision by 90%. He also created a prompt system boosting high-accuracy color picker selections by 40%.",
   codsoft: "At CodSoft (Nov 2025 – Dec 2025), Nayan engineered 3 scalable Python pipelines (Fraud, Spam, Churn) for 15,000+ records (20% data quality gain) and tuned Random Forest classifiers to cut false positives by 15% with 94% detection reliability."
 };
@@ -281,59 +278,72 @@ function getBotReply(query) {
   return "I'm Nayan's AI buddy! I can answer anything about his projects, internships (Ethara.ai, CodSoft), tech stack, hackathon awards, education at VIT Bhopal, or how to contact him. What would you like to know?";
 }
 
-const chatMsgs = $("chat-messages");
-const chatForm = $("chat-form");
-const chatInput = $("chat-input");
-const chatClear = $("chat-clear");
-const chatChips = $("chat-chips");
+const buddyMsgs = $("buddy-messages");
+const buddyForm = $("buddy-form");
+const buddyInput = $("buddy-input");
+const buddyClear = $("buddy-clear");
+const buddyChips = $("buddy-chips");
 
-function appendMsg(text, isUser = false) {
-  if (!chatMsgs) return;
-  const msgDiv = document.createElement("div");
-  msgDiv.className = `chat-msg${isUser ? " user" : ""}`;
-  msgDiv.textContent = text;
-  chatMsgs.appendChild(msgDiv);
-  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+function appendBuddyMsg(text, isUser = false) {
+  if (!buddyMsgs) return;
+  const row = document.createElement("div");
+  row.className = `buddy-row ${isUser ? "user" : "bot"}`;
+  row.innerHTML = `<div class="buddy-bubble">${text}</div>`;
+  buddyMsgs.appendChild(row);
+  buddyMsgs.scrollTop = buddyMsgs.scrollHeight;
 }
 
-function initChat() {
-  if (!chatMsgs) return;
-  chatMsgs.innerHTML = "";
-  appendMsg("👋 Hi! I'm Nayan's AI Assistant. Ask me anything about his projects, skills, internships, or achievements!");
+function initBuddy() {
+  if (!buddyMsgs) return;
+  buddyMsgs.innerHTML = "";
+  appendBuddyMsg("🙏 Namaste! I'm Nayan's AI Assistant. Ask me anything about his projects, skills, internships, or achievements!");
 }
 
-function handleUserAsk(text) {
+function handleBuddyAsk(text) {
   if (!text || !text.trim()) return;
-  appendMsg(text, true);
+  appendBuddyMsg(text, true);
   setTimeout(() => {
-    appendMsg(getBotReply(text), false);
+    const reply = getBotReply(text);
+    appendBuddyMsg(reply, false);
+
+    // Natural Voice TTS if supported
+    if ('speechSynthesis' in window) {
+      try {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(reply.slice(0, 160));
+        utter.rate = 1.05;
+        window.speechSynthesis.speak(utter);
+      } catch (err) {
+        console.warn("Speech synthesis error:", err);
+      }
+    }
   }, 350);
 }
 
-if (chatForm) {
-  chatForm.onsubmit = (e) => {
+if (buddyForm) {
+  buddyForm.onsubmit = (e) => {
     e.preventDefault();
-    if (chatInput) {
-      handleUserAsk(chatInput.value);
-      chatInput.value = "";
+    if (buddyInput) {
+      handleBuddyAsk(buddyInput.value);
+      buddyInput.value = "";
     }
   };
 }
-if (chatClear) chatClear.onclick = initChat;
+if (buddyClear) buddyClear.onclick = initBuddy;
 
-if (chatChips) {
+if (buddyChips) {
   const chips = ["Projects", "Internships", "Skills", "Achievements", "Contact"];
-  chatChips.innerHTML = chips.map((c) => `<button type="button">${c}</button>`).join("");
-  chatChips.onclick = (e) => {
+  buddyChips.innerHTML = chips.map((c) => `<button type="button" class="buddy-chip">${c}</button>`).join("");
+  buddyChips.onclick = (e) => {
     if (e.target.tagName === "BUTTON") {
-      handleUserAsk(e.target.textContent);
+      handleBuddyAsk(e.target.textContent);
     }
   };
 }
-initChat();
+initBuddy();
 
 /* -------------------------------------------------------------------
-   7. Projects Showcase & Filter
+   7. Projects Showcase & Filter (Sparsh Style .final-project-card)
    ------------------------------------------------------------------- */
 const PROJECTS = [
   {
@@ -345,7 +355,7 @@ const PROJECTS = [
     image: ""
   },
   {
-    title: "InterviewIQ - Enterprise AI Mock Interview Platform",
+    title: "InterviewIQ - Enterprise Mock Interview Platform",
     category: "AI & LLM",
     description: "Developed a full-stack platform with 3 interview modes generating tailored questions from candidate resumes via Gemini AI, an embedded Monaco live coding editor with time-complexity analysis and automated JSON-based grading, STAR-method behavioral rounds, and 3 enterprise proctoring controls.",
     repo: "AI-mock-interview-enterprices-platform",
@@ -473,32 +483,33 @@ function renderProjects(filterCategory = "All") {
     const hasImg = Boolean(proj.image);
     const banner = hasImg
       ? `<img src="${proj.image}" alt="${proj.title}" loading="lazy">`
-      : `<div class="project-placeholder-banner" style="background: linear-gradient(135deg, hsl(${(idx * 53 + 140) % 360} 45% 22%), hsl(${(idx * 53 + 200) % 360} 55% 10%))">
+      : `<div class="project-placeholder-banner" style="background: linear-gradient(135deg, hsl(${(idx * 53 + 160) % 360} 55% 18%), hsl(${(idx * 53 + 220) % 360} 65% 10%))">
           ${proj.title[0]}
-          <span class="project-idx-badge">${String(idx + 1).padStart(2, "0")}</span>
         </div>`;
 
     return `
-      <div class="project-card">
-        <div class="project-img-box">${banner}</div>
-        <div class="project-body">
-          <span class="project-cat">${proj.category}</span>
-          <h4>${proj.title}</h4>
-          <p>${proj.description}</p>
-          <div class="project-tags">
-            ${proj.tags.map((t) => `<span class="project-tag">${t}</span>`).join("")}
+      <div class="final-project-card">
+        <div class="final-project-image">
+          ${banner}
+        </div>
+        <div class="final-project-content">
+          <span class="project-watermark">${String(idx + 1).padStart(2, "0")}</span>
+          <p class="project-category-tag">${proj.category}</p>
+          <h3>${proj.title}</h3>
+          <p class="project-desc">${proj.description}</p>
+          <div class="project-tags-row">
+            ${proj.tags.map((t) => `<span class="project-tag-pill">${t}</span>`).join("")}
           </div>
-          <div class="project-actions">
-            <a href="${ghUrl}" target="_blank" rel="noopener noreferrer" class="project-btn-gh">GitHub ↗</a>
-            <button class="project-btn-detail" data-idx="${PROJECTS.indexOf(proj)}">Details</button>
+          <div class="final-project-buttons">
+            <a href="${ghUrl}" target="_blank" rel="noopener noreferrer" class="btn-project-gh">GitHub ↗</a>
+            <button class="btn-project-detail" data-idx="${PROJECTS.indexOf(proj)}">More Details</button>
           </div>
         </div>
       </div>
     `;
   }).join("");
 
-  // Attach modal trigger listeners
-  document.querySelectorAll(".project-btn-detail").forEach((btn) => {
+  document.querySelectorAll(".btn-project-detail").forEach((btn) => {
     btn.onclick = () => {
       const p = PROJECTS[btn.dataset.idx];
       if (!p || !projectDialog) return;
@@ -511,8 +522,8 @@ function renderProjects(filterCategory = "All") {
           ${p.tags.map((t) => `<span class="skill-pill">${t}</span>`).join("")}
         </div>
         <div class="hero-actions" style="margin-top:20px;">
-          <a class="btn-primary" href="${ghUrl}" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
-          <button class="btn-secondary" onclick="document.getElementById('project-dialog').close()">Close</button>
+          <a class="btn-gradient" href="${ghUrl}" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
+          <button class="btn-white" onclick="document.getElementById('project-dialog').close()">Close</button>
         </div>
       `;
       projectDialog.showModal();
@@ -520,14 +531,12 @@ function renderProjects(filterCategory = "All") {
   });
 }
 
-// Dialog backdrop click to dismiss
 if (projectDialog) {
   projectDialog.onclick = (e) => {
     if (e.target === projectDialog) projectDialog.close();
   };
 }
 
-// Project Filter Buttons
 document.querySelectorAll(".filter-btn").forEach((btn) => {
   btn.onclick = () => {
     document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
@@ -542,12 +551,12 @@ renderProjects("All");
    ------------------------------------------------------------------- */
 const CERTS_DATA = [
   ["Cloud Computing", "NPTEL • Elite + Gold", "Ranked in Top 5% nationally in advanced cloud architecture, virtualization, and distributed systems.", "NPTEL"],
-  ["Internet of Things (IoT)", "NPTEL • Elite + Gold", "Advanced certification in sensor networks, embedded protocols, and IoT data processing.", "IoT"],
+  ["Applied Machine Learning in Python", "University of Michigan", "Practical ML pipelines with Scikit-learn: classification, regression, and model evaluation.", "UMich"],
   ["Oracle OCI GenAI Professional", "Oracle Cloud", "Architecting Generative AI applications, embeddings, and enterprise LLM solutions on OCI.", "OCI AI"],
   ["Oracle OCI AI Foundations", "Oracle Cloud", "Foundational AI principles, computer vision, natural language processing, and cloud services.", "Oracle"],
-  ["Applied Machine Learning in Python", "University of Michigan", "Practical ML pipelines with Scikit-learn: classification, regression, and model evaluation.", "UMich"],
-  ["Tata Imagination Challenge", "Semifinalist", "Selected among national semifinalists for innovative technology-driven problem solving.", "Tata"],
-  ["EY Techathon 6.0", "Top 100 Nationally", "Selected in Top 100 teams nationally out of 5,000+ participating engineering teams.", "EY"],
+  ["Google IT Support Professional", "Google", "Professional certificate covering system administration, troubleshooting, and networking.", "Google"],
+  ["Tata Imagination Challenge", "Qualified Round 2", "Selected among national qualifiers for innovative technology-driven problem solving.", "Tata"],
+  ["EY Techathon 6.0", "Top 100 Nationally", "Selected in Top 100 teams nationally out of 5,000+ participating engineering cohorts.", "EY"],
   ["Adobe Hackathon", "Top 50 Nationally", "Ranked in Top 50 teams across India out of 6,000+ competing engineering cohorts.", "Adobe"]
 ];
 
